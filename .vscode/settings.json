@@ -1,0 +1,11 @@
+{
+  "editor.formatOnSave": true,
+  "html.format.indentInnerHtml": true,
+  "html.format.indentHandlebars": true,
+  "json.format.keepLines": false,
+  "prettier.requireConfig": true,
+  "prettier.useTabs": true,
+  "prettier.configPath": ".prettierrc",
+  "diffEditor.ignoreTrimWhitespace": false,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
+}
