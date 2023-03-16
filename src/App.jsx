@@ -1,10 +1,13 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
+import Header from "./components/Header";
+import TeslaBattery from "./components/TeslaBattery";
 
 const App = () => {
   return (
     <>
-      <h1>RENDERED</h1>
+      <Header/>
+      <TeslaBattery />
     </>
   );
 };
