@@ -18,7 +18,7 @@ class TeslaBattery extends React.Component{
         this.state = {
             carstats: [],
             config: {
-                speed: 55,
+                speed: 50,
                 temperature: 20,
                 climate: true,
                 wheels: 19
