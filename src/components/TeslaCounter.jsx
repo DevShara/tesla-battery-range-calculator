@@ -1,13 +1,15 @@
 import React from "react";
-import PropTypes from 'react';
+import PropTypes from 'prop-types';
 import './TeslaCounter.css';
 
 const TeslaCounter = (props) => {
-    <div className="tesla-counter">
-        <p className="tesla-counter__title">{PropTypes.initValues.title}</p>
+    return(
+        <div className="tesla-counter">
+        <p className="tesla-counter__title">{props.initValues.title}</p>
         <div className="tesla-counter__container cf">
             <div className="tesla-counter__item">
                 <p className="tesla-counter__number">
+                    {props.currentValue}
                     <span>{props.initValues.unit}</span>
                 </p>
                 <div className="tesla-counter__controls">
@@ -23,9 +25,10 @@ const TeslaCounter = (props) => {
             </div>
         </div>
     </div>
+    )
 };
 
-TeslaCounter.PropTypes = {
+TeslaCounter.propTypes = {
     currentValue: PropTypes.number,
     increment:PropTypes.func,
     decrement: PropTypes.func,

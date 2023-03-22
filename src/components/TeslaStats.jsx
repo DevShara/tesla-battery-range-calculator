@@ -15,8 +15,6 @@ const TeslaStats = (props) => {
                 ))}
            </ul>
         </div>
-        
-        
     )
 }
 

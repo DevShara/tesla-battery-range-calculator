@@ -3,6 +3,7 @@ import './TeslaBattery.css';
 import TeslaNotice from './TeslaNotice';
 import TeslaCar from "./TeslaCar";
 import TeslaStats from "./TeslaStats";
+import TeslaCounter from "./TeslaCounter";
 import { getModelData } from "./BatteryService"; 
 
 
@@ -14,6 +15,9 @@ class TeslaBattery extends React.Component{
 
         this.calculateStats = this.calculateStats.bind(this);
         this.statsUpdate = this.statsUpdate.bind(this);
+        this.increment = this.increment.bind(this);
+        this.decrement = this.decrement.bind(this);
+        // this.updateCounterState = this.updateCounterState.bind(this)
 
         this.state = {
             carstats: [],
@@ -53,6 +57,59 @@ class TeslaBattery extends React.Component{
         this.statsUpdate()
     }
 
+    updateCounterState(title, newValue){
+        const config = {...this.state.config};
+
+        title === 'Speed' ? config['speed'] = newValue : config['temperature'] = newValue;
+
+        this.setState({config});
+    }
+
+    increment(e, title){
+        e.preventDefault();
+
+        let currentValue, maxValue, step;
+        const {speed, temperature} = this.props.counterDefaultVal;
+        if(title == 'Speed'){
+            currentValue = this.state.config.speed;
+            maxValue = speed.max;
+            step = speed.step;
+        }else{
+            currentValue = this.state.config.temperature;
+            maxValue = temperature.max;
+            step = temperature.step;
+        }
+
+        if(currentValue < maxValue){
+            const newValue = currentValue + step;
+            this.updateCounterState(title, newValue);
+        }
+
+    }
+
+    decrement(e, title){
+        e.preventDefault();
+
+        let currentValue, minValue, step;
+        const {speed, temperature} = this.props.counterDefaultVal; 
+
+        if(title == "Speed"){
+            currentValue = this.state.config.speed;
+            minValue = speed.min;
+            step = speed.step
+        }else{
+            currentValue = this.state.config.temperature;
+            minValue = temperature.min;
+            step = temperature.step
+        }
+
+        if(currentValue > minValue){
+            const newValue = currentValue - step;
+            this.updateCounterState(title, newValue);
+        }
+
+    }
+
 
     render(){
 
@@ -64,6 +121,22 @@ class TeslaBattery extends React.Component{
                  <TeslaCar wheelsize={config.wheels} />
                  <TeslaStats carstats={carstats}/>
                  <TeslaNotice />
+                 <div className="tesla-controls cf">
+                    <TeslaCounter
+                        currentValue={this.state.config.speed}
+                        initValues={this.props.counterDefaultVal.speed}
+                        increment={this.increment}
+                        decrement={this.decrement}
+                    />
+                </div>
+                <div className="tesla-climate-container cf">
+                    <TeslaCounter 
+                        currentValue={this.state.config.temperature}
+                        initValues={this.props.counterDefaultVal.temperature}
+                        increment={this.increment}
+                        decrement={this.decrement}
+                    />
+                </div>
           </form>
         )
     }
