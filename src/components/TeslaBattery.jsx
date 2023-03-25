@@ -66,7 +66,7 @@ class TeslaBattery extends React.Component{
 
         title === 'Speed' ? config['speed'] = newValue : config['temperature'] = newValue;
 
-        this.setState({config});
+        this.setState({config}, this.statsUpdate);
     }
 
     increment(e, title){
@@ -134,7 +134,7 @@ class TeslaBattery extends React.Component{
         return(
             <form className="tesla-battery">
                  <h1>Range Per Charge</h1>
-                 <TeslaCar wheelsize={config.wheels} />
+                 <TeslaCar wheelSize={config.wheels} />
                  <TeslaStats carstats={carstats}/>
                  <div className="tesla-controls cf">
                     <TeslaCounter
